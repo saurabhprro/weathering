@@ -1,0 +1,116 @@
+<!-- main.html (Main Page with Search Bar and Doogle Weather Container) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Doogle Weather - Main</title>
+    <style>
+        .flashcard {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: center;
+           
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #784caf;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Weather Portal</h1>
+        <nav>
+            <a href="main.html">Main</a>
+            <a href="index.html">Home</a>
+            <a href="current.html">Current Weather</a>
+            <a href="forecast.html">7-Day Forecast</a>
+            <a href="contributers.html"> About Contributers</a>
+        </nav>
+    </header>
+
+    <section class="content">
+        <div class="flashcard">
+            <h2>Doogle Weather</h2>
+            <label for="location">Enter Location:</label>
+            <input type="text" id="location" placeholder="Enter Location">
+            <button onclick="searchWeather()">Search</button>
+            <div class="weather-info">
+                <p>Location: <span id="location"></span></p>
+                <p>Temperature: <span id="temperature"></span></p>
+                <p>Description: <span id="description"></span></p>
+                <p>Wind Speed: <span id="wind-speed"></span></p>
+                <p>Humidity: <span id="humidity"></span></p>
+                <p>Sunrise: <span id="sunrise"></span></p>
+                <p>Sunset: <span id="sunset"></span></p>
+            </div>
+        </section>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Weather Portal</p>
+    </footer>
+    <script>
+        function searchWeather() {
+    var location = document.getElementById('location').value;
+    if (location === '') {
+        alert('Please enter a location before searching.');
+        return;
+    }
+
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=6f7db34bb5ac3800fde1cb88cddae7e6')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('location').value = data.name;
+            document.getElementById('temperature').textContent =`${Math.round(data.main.temp)-273}°C`;
+            document.getElementById('description').textContent = data.weather[0].description;
+            document.getElementById('wind-speed').textContent = data.wind.speed ;
+            document.getElementById('humidity').textContent = data.main.humidity;
+            document.getElementById('sunrise').textContent = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+            document.getElementById('sunset').textContent = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+        })
+        .catch(error => console.error('Error:', error));
+}        
+
+    </script>
+ 
+    
+    
+   
+       
+                
+</body>
+</html>

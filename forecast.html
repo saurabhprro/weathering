@@ -1,0 +1,36 @@
+<!-- forecast.html (7-Day Forecast Page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Weather Portal - 7-Day Forecast</title>
+</head>
+<body>
+    <header>
+        <h1>Weather Portal</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="current.html">Current Weather</a>
+            <a href="forecast.html">7-Day Forecast</a>
+            <a href="contributers.html">About Contributers</a>
+        </nav>
+    </header>
+
+    <section class="content">
+        <h2>7-Day Forecast</h2>
+        <div id="weatherwidget-io"></div>
+        <!-- Add content related to 7-day forecast here -->
+    
+    <a class="weatherwidget-io" href="https://forecast7.com/en/26d8580d95/lucknow/" data-label_1="LUCKNOW" data-label_2="WEATHER" data-theme="original" >LUCKNOW WEATHER</a>
+    </section>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+
+    <footer>
+        <p>&copy; 2023 Weather Portal</p>
+    </footer>
+</body>
+</html>
